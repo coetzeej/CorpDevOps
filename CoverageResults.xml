@@ -152,10 +152,10 @@
       <ModuleName>System.Web</ModuleName>
       <Classes />
     </Module>
-    <Module hash="AC-43-A5-41-FB-E7-08-EA-F3-9C-68-B1-62-12-D0-A8-32-2E-99-66">
+    <Module hash="F9-2D-BB-45-CC-95-B6-11-57-BC-F6-6B-EC-9B-8B-66-79-FD-D8-9F">
       <Summary numSequencePoints="2" visitedSequencePoints="2" numBranchPoints="1" visitedBranchPoints="1" sequenceCoverage="100" branchCoverage="100" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" visitedClasses="1" numClasses="1" visitedMethods="1" numMethods="1" />
       <ModulePath>C:\Users\jaco\Projects\CorpDevOps\src\webapp.tests\bin\Debug\webapp.tests.dll</ModulePath>
-      <ModuleTime>2017-04-27T09:55:55.3201378Z</ModuleTime>
+      <ModuleTime>2017-04-27T12:36:12.9741662Z</ModuleTime>
       <ModuleName>webapp.tests</ModuleName>
       <Files>
         <File uid="1" fullPath="C:\Users\jaco\Projects\CorpDevOps\src\webapp.tests\unit\SimpleTests.cs" />
