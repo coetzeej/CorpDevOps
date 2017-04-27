@@ -7,19 +7,23 @@
 
 var target = Argument("target", "Default");
 var buildType = Argument<string>("buildType", "develop");
-var buildCounter = Argument<int>("buildCounter", 0);
-
 var tools = "./tools";
+
 var sln = "./src/CorpDevOps.sln";
+
 var releaseFolder = "./src/CorpDevOps/bin/Release";
 var releaseExe = "/webapp.exe";
+
 var unitTestPaths = "./src/webapp.tests/bin/Debug/webapp.tests.dll";
+
 var nuspecFile = "./src/CorpDevOps.nuspec";
-var testResultFile = "./TestResult.xml";
-var testErrorFile = "./Errors.xml";
+
 var coverPath = "./CoverageResults.xml";
 
+var testResultFile = "./TestResult.xml";
+var testErrorFile = "./Errors.xml";
 var testSucceeded = false; 
+
 var sonarUrl = "https://github.com/SonarSource-VisualStudio/sonar-scanner-msbuild/releases/download/2.1/MSBuild.SonarQube.Runner-2.1.zip";
 var sonarZipPath = tools + "/SonarQube.zip";
 var sonarQubeServerUrl = "";
@@ -47,18 +51,24 @@ Task("Configure")
 		Information("TeamCity: " + TeamCity.IsRunningOnTeamCity);
 		Information("AppVeyor: " + AppVeyor.IsRunningOnAppVeyor);
 		Information("BuildType: " + buildType);
-		Information("BuildCounter: " + buildCounter);
+		Information("BuildNo: " + GitVersion(new GitVersionSettings {
+        	UpdateAssemblyInfo = true
+    	}).FullSemVer);
 });
 
 Task("Build")
 	.IsDependentOn("Configure")
 	.Does (() => {
+		var version = GitVersion();		
 		DotNetBuild (sln, c => c.Configuration = "Release");
-		var version = GitVersion(new GitVersionSettings {
-        	UpdateAssemblyInfo = true
-    	});
-		Information("Version: " + version.FullSemVer);
-		// PushVersion(ciVersion);
+		if (TeamCity.IsRunningOnTeamCity)
+		{
+			TeamCity.SetBuildNumber(version.FullSemVer);
+		}
+		else
+		{
+			
+		}
 });
 
 Task("Test")
