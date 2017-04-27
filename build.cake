@@ -32,16 +32,17 @@ var sonarQubeKey = "";
 
 Task("Install")
 	.Does(() =>{
-		if(!FileExists(sonarZipPath))
-		{
-			Information("Downloading SonarQube");
-			DownloadFile(sonarUrl, sonarZipPath);
-		}
-		if(!FileExists(tools + "/MSBuild.SonarQube.Runner.exe"))
-		{
-			Information("Extraction SonarQube");
-			Unzip(tools + "/SonarQube.zip", tools + "/");
-		}
+		NuGetRestore(sln);
+		// if(!FileExists(sonarZipPath))
+		// {
+		// 	Information("Downloading SonarQube");
+		// 	DownloadFile(sonarUrl, sonarZipPath);
+		// }
+		// if(!FileExists(tools + "/MSBuild.SonarQube.Runner.exe"))
+		// {
+		// 	Information("Extraction SonarQube");
+		// 	Unzip(tools + "/SonarQube.zip", tools + "/");
+		// }
 });
 
 Task("Configure")
