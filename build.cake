@@ -8,8 +8,6 @@
 var target = Argument("target", "Default");
 var buildType = Argument<string>("buildType", "develop");
 var buildCounter = Argument<int>("buildCounter", 0);
-var version = "0.0.0";
-var ciVersion = "0.0.0-CI00000";
 
 var tools = "./tools";
 var sln = "./src/CorpDevOps.sln";
@@ -56,12 +54,10 @@ Task("Build")
 	.IsDependentOn("Configure")
 	.Does (() => {
 		DotNetBuild (sln, c => c.Configuration = "Release");
-		// TODO get version numbers
-		// var file = MakeAbsolute(Directory(releaseFolder)) + releaseExe;
-		// version = GetVersionNumber(file);
-		// ciVersion = GetVersionNumberWithContinuesIntegrationNumberAppended(file, buildCounter);
-		// Information("Version: " + version);
-		// Information("CI Version: " + ciVersion);
+		var version = GitVersion(new GitVersionSettings {
+        	UpdateAssemblyInfo = true
+    	});
+		Information("Version: " + version.FullSemVer);
 		// PushVersion(ciVersion);
 });
 
@@ -95,19 +91,19 @@ Task("Test")
 Task("Publish")
 	.WithCriteria(buildType == "master")
 	.Does (() => {
-		if(!testSucceeded)
-		{
-			Error("Unit tests failed - Cannot push to Nuget");
-			throw new Exception("Unit tests failed");
-		}
+		// if(!testSucceeded)
+		// {
+		// 	Error("Unit tests failed - Cannot push to Nuget");
+		// 	throw new Exception("Unit tests failed");
+		// }
 
-		CreateDirectory ("./nupkg/");
-		ReplaceRegexInFiles(nuspecFile, "0.0.0", version);
+		// CreateDirectory ("./nupkg/");
+		// ReplaceRegexInFiles(nuspecFile, "0.0.0", version);
 		
-		NuGetPack (nuspecFile, new NuGetPackSettings { 
-			Verbosity = NuGetVerbosity.Detailed,
-			OutputDirectory = "./nupkg/"
-		});	
+		// NuGetPack (nuspecFile, new NuGetPackSettings { 
+		// 	Verbosity = NuGetVerbosity.Detailed,
+		// 	OutputDirectory = "./nupkg/"
+		// });	
 });
 
 Task("Deploy")
