@@ -7,7 +7,6 @@
 
 var target = Argument("target", "Default");
 var buildType = Argument<string>("buildType", "develop");
-var buildCounter = Argument<int>("buildCounter", 0);
 
 var tools = "./tools";
 var sln = "./src/CorpDevOps.sln";
@@ -47,7 +46,9 @@ Task("Configure")
 		Information("TeamCity: " + TeamCity.IsRunningOnTeamCity);
 		Information("AppVeyor: " + AppVeyor.IsRunningOnAppVeyor);
 		Information("BuildType: " + buildType);
-		Information("BuildCounter: " + buildCounter);
+		Information("BuildNo: " + GitVersion(new GitVersionSettings {
+        	UpdateAssemblyInfo = false
+    	}).FullSemVer);
 });
 
 Task("Build")
