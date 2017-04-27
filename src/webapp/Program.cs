@@ -27,7 +27,6 @@ namespace webapp
 	{
 		public Module()
 		{
-			// TODO support async			
 			Get["/"] = _ => "<html><body>Hello World!</body></html>";
 		}
 	}

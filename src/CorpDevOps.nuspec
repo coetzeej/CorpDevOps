@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>CorpDevOps</id>
+    <version>1.0.0</version>
+    <authors>coetzeej@timesmedia.co.za;griffithsg@timesmedia.co.za</authors>
+    <owners>TimesMedia</owners>
+    <licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>
+    <projectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</projectUrl>
+    <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Test project for DevOps workflows and operations</description>
+    <releaseNotes>First release.</releaseNotes>
+    <copyright>Copyright 2017, TimesMedia</copyright>
+    <tags>devops</tags>
+    <dependencies>
+      <dependency id="SampleDependency" version="1.0" />
+    </dependencies>
+  </metadata>
+</package>
